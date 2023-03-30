@@ -32,6 +32,20 @@
     top: 30%;
     }
    
+    .table{
+      position: relative;
+      left: 25%;
+      padding-bottom: 0px;
+      padding-right: 0;
+      width: 50%;
+      border: 1px solid;
+    }
+
+    #table_id{
+      position: relative;
+     width: 100%;
+      border: 1px solid;
+    }
   .wrapper {
     width: 90%;
     max-width: 34.37em;
@@ -57,7 +71,7 @@
     max-height: inherit;
     width: inherit;
     top: 0;
-    padding: 0;
+    padding: 10px;
   }
   /* @keyframes rotate {
     100% {

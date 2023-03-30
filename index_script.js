@@ -155,7 +155,7 @@ function on_click_pass_check() {
   if (input_pass == "1234" & selected_academy.length >2) {
     console.log(selected_academy);
     console.log("checked");
-    // window.localStorage.setItem('data' , JSON.stringify(god_data) );
+    window.localStorage.setItem('sel_aca' , selected_academy );
     window.location.href= "http://127.0.0.1:5500/home.html"
 
     // console.log(selected_academy);

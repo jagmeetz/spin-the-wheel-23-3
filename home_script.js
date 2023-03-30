@@ -81,7 +81,7 @@ spinBtn.addEventListener("click", () => {
   //Empty final value
   finalValue.innerHTML = `<p>Good Luck!</p>`;
   //Generate random degrees to stop at
-  let randomDegree = Math.floor(Math.random() * (360) );
+  let randomDegree = Math.floor(Math.random() * 360);
   //Interval for rotation animation
   let rotationInterval = window.setInterval(() => {
     //Set rotation for piechart
@@ -106,8 +106,45 @@ spinBtn.addEventListener("click", () => {
 });
 ////spin wheel//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    let godi;
-    godi=JSON.parse(window.localStorage.getItem('data'));
+////fetching academy name and retreiving teacher names,classes and other related data //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        console.log(godi);
-  
+let aca_name;
+aca_name = window.localStorage.getItem("sel_aca");
+
+let god_data;
+god_data = JSON.parse(window.localStorage.getItem("data"));
+
+let table_data = [];
+for (let i = 0; i < god_data.length; i++) {
+  if (god_data[i][0] == aca_name) {
+    table_data.push(god_data[i]);
+  }
+}
+//    console.log(table_data);
+
+////fetching academy name and retreiving teacher names,classes and other related data //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////render table using table_data //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function render_table() {
+  var x = document.getElementById("table_id");
+  x.createCaption().innerText = aca_name;
+
+  var header = x.createTHead();
+  var row = header.insertRow(0);
+
+  var cellA = row.insertCell(0);
+  var cellB = row.insertCell(1);
+  cellA.innerHTML = "<b>Teacher Name<b>";
+  cellB.innerHTML = "<b>Unique Code<b>";
+  for (let i = 0; i < table_data.length; i++) {
+    var row = x.insertRow(i + 1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+
+    cell1.innerHTML = table_data[i][1];
+    cell2.innerHTML = table_data[i][2];
+  }
+}
+render_table();
+////render table using table_data //////////////////////////////////////////////////////////////////////////////////////////////////////////////
