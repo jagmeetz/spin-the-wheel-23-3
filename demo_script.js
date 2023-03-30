@@ -55,6 +55,9 @@ function maybeEnableButtons() {
   if (gapiInited && gisInited) {
     // document.getElementById('authorize_button').style.visibility = 'visible';
     console.log("gapi initiated");
+    let godi;
+    godi=JSON.parse (localStorage.getItem('data'));
+    console.log(godi);
   }
 }
 /**
@@ -151,7 +154,14 @@ function on_click_pass_check() {
   if (input_pass == "1234" & selected_academy.length >2) {
     console.log(selected_academy);
     console.log("checked");
+    localStorage.setItem('data' , JSON.stringify(god_data) );
     window.location.href= "http://localhost:5500/home.html"
+    let godi;
+    godi=localStorage.getItem('data');
+    console.log(godi);
+    // console.log(selected_academy);
+    // console.log("checked");
+
   }
 }
 function timer() {
