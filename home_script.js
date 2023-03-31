@@ -97,6 +97,10 @@ render_table();
 
 ////render chart //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let myChart;
+let label_var=[];
+for (let i=0;i<table_data.length;i++){
+  label_var.push(table_data[i][1]);
+}
 function render_chart(){
   myChart = new Chart(wheel, {
     //Plugin for displaying text on pie chart
@@ -105,7 +109,7 @@ function render_chart(){
     type: "pie",
     data: {
       //Labels(values which are to be displayed on chart)
-      labels: [1, 2, 3, 4, 5, 6],
+      labels: label_var,
       //Settings for dataset/pie
       datasets: [
         {
@@ -152,16 +156,7 @@ else{
   rotation_value_selector=rotationValues
 }
 //display value based on the randomAngle
-const valueGenerator = (angleValue) => {
-  for (let i of rotation_value_selector) {
-    //if the angleValue is between min and max then display it
-    if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
-      spinBtn.disabled = false;
-      break;
-    }
-  }
-};
+
 //Spinner count
 let count = 0;
 //100 rotations for animation and last rotation for result
@@ -195,3 +190,134 @@ spinBtn.addEventListener("click", () => {
     }
   }, 10);
 });
+
+const valueGenerator = (angleValue) => {
+  for (let i of rotation_value_selector) {
+    //if the angleValue is between min and max then display it
+    if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+      finalValue.innerHTML = `<p>Winner: ${table_data[i.value-1][1]}</p>`;
+      console.log(table_data[i.value-1]);
+      //appendValues("1zNxmasKf1U220lQqGGEd2BKkwo3pY55OH66pWkmF98I","Sheet1!A1","RAW","dadasaf");
+       spinBtn.disabled = false;
+      break;
+    }
+  }
+};
+///post on google sheets////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// const CLIENT_ID = "111620250990197785541";
+// const API_KEY = "AIzaSyChPMfCOVsnJgmikJZg7E3A6FX77xxeo-E";
+
+
+// // Discovery doc URL for APIs used by the quickstart
+// const DISCOVERY_DOC =
+//   "https://sheets.googleapis.com/$discovery/rest?version=v4";
+
+// // Authorization scopes required by the API; multiple scopes can be
+// // included, separated by spaces.
+// const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
+
+// let tokenClient;
+// let gapiInited = false;
+// let gisInited = false;
+
+// /**
+//  * Callback after api.js is loaded.
+//  */
+// function gapiLoaded() {
+//   gapi.load("client", initializeGapiClient);
+// }
+// /**
+//  * Callback after the API client is loaded. Loads the
+//  * discovery doc to initialize the API.
+//  */
+// function initializeGapiClient() {
+//   gapi.client.init({
+//     apiKey: API_KEY,
+//     //  clientId: CLIENT_ID,
+//     // scope:  SCOPES,
+//     discoveryDocs: [DISCOVERY_DOC],
+//   });
+//   gapiInited = true;
+//   maybeEnableButtons();
+// }
+
+// /**
+//  * Callback after Google Identity Services are loaded.
+//  */
+// function gisLoaded() {
+//   tokenClient = google.accounts.oauth2.initTokenClient({
+//     client_id: CLIENT_ID,
+//     scope: SCOPES,
+//     callback: "", // defined later
+//   });
+//   gisInited = true;
+//   maybeEnableButtons();
+// }
+
+// /**
+//  * Enables user interaction after all libraries are loaded.
+//  */
+// function maybeEnableButtons() {
+//   if (gapiInited && gisInited) {
+//     // document.getElementById('authorize_button').style.visibility = 'visible';
+//     console.log("gapi initiated");    
+//   }
+// }
+// /**
+//  *  Sign in the user upon button click.
+//  */
+// function handleAuthClick() {
+//   tokenClient.callback = async (resp) => {
+//     if (resp.error !== undefined) {
+//       throw resp;
+//     }
+//   };
+
+//   if (gapi.client.getToken() === null) {
+//     // Prompt the user to select a Google Account and ask for consent to share their data
+//     // when establishing a new session.
+//     tokenClient.requestAccessToken({ prompt: "consent" });
+//   } else {
+//     // Skip display of account chooser and consent dialog for an existing session.
+//     tokenClient.requestAccessToken({ prompt: "" });
+//   }
+// }
+
+// /**
+//  *  Sign out the user upon button click.
+//  */
+// function handleSignoutClick() {
+//   const token = gapi.client.getToken();
+//   if (token !== null) {
+//     google.accounts.oauth2.revoke(token.access_token);
+//     gapi.client.setToken("");
+//   }
+// }
+
+
+// async function appendValues(spreadsheetId, range, valueInputOption, _values, callback) {
+
+//   values = _values;
+//   const body = {
+//     values: values,
+//   };
+//   try {
+//     await gapi.client.sheets.spreadsheets.values.append({
+//       spreadsheetId: spreadsheetId,
+//       range: range,
+//       valueInputOption: valueInputOption,
+//       resource: body,
+//     }).then((response) => {
+//       const result = response.result;
+//       console.log(`${result.updates.updatedCells} cells appended.`);
+//       if (callback) callback(response);
+//     });
+//   } catch (err) {
+//     //document.getElementById('content').innerText = err.message;
+//     console.log(err);
+//     return;
+//   }
+// }
+
+
