@@ -1,9 +1,35 @@
+const firebaseApp = firebase.initializeApp({
+  apiKey: "AIzaSyCofNKXGLmDBwxCSzyfjPQQf0sUtcaMy_0",
+  authDomain: "spin-wheelz.firebaseapp.com",
+  projectId: "spin-wheelz",
+  storageBucket: "spin-wheelz.appspot.com",
+  messagingSenderId: "118466041762",
+  appId: "1:118466041762:web:9717138830c4112e6f44fb",
+});
+const db = firebaseApp.firestore();
+let keys=[];
+const read_keys=()=>{
+  db.collection('keys')
+  .get()
+  .then((data)=>{
+keys= data.docs.map((item)=>{
+  return{...item.data()}
+});
+
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+}
+read_keys();
+
 ///connect with google sheet ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO(developer): Set to client ID and API key from the Developer Console
-const CLIENT_ID = "111620250990197785541";
+const CLIENT_ID = '111620250990197785541';
 const API_KEY = "AIzaSyChPMfCOVsnJgmikJZg7E3A6FX77xxeo-E";
-
+const sheet_id= "1kN24uKeTLC0trCFIeHyugZZNxeKbRs0gBZ6_UrzpDM4";
+ 
 // Discovery doc URL for APIs used by the quickstart
 const DISCOVERY_DOC =
   "https://sheets.googleapis.com/$discovery/rest?version=v4";
@@ -152,7 +178,7 @@ function render_dropdown() {
 function on_click_pass_check() {
   let input_pass = document.getElementById("password").value;
   let selected_academy = document.getElementById("aa_dropdown").value;
-  if (input_pass == "1234" & selected_academy.length >2) {
+  if (input_pass == keys[0].pass & selected_academy.length >2) {
     console.log(selected_academy);
     console.log("checked");
     window.localStorage.setItem('sel_aca' , selected_academy );
@@ -166,7 +192,7 @@ function on_click_pass_check() {
 function timer() {
   setTimeout(function () {
     listMajors(
-      "1kN24uKeTLC0trCFIeHyugZZNxeKbRs0gBZ6_UrzpDM4",
+      sheet_id,
       "Class Data!A2:C"
     );
 

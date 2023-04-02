@@ -1,46 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TC Columbia University</title>
     <script src="https://apis.google.com/js/api.js"></script>
-        <!-- Stylesheet -->
-        <link rel="stylesheet" href="style2.css" />
-</head>
-<body>
-        <!-- top heading bar -->
-        <div id="top_bar">
-            <div id ="logo">
-                <img src="tc_png.png" alt="Teachers College" height="130px">
-            </div>
-            <div id="heading">
-                <h1>Welcome from Teachers College, Columbia University</h1>
-            </div>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <!-- top heading bar -->
+    <div id="top_bar">
+      <div id="logo">
+        <img src="tc_png.png" alt="Teachers College" height="130px" />
+      </div>
+      <div id="heading">
+        <h1>Welcome from Teachers College, Columbia University</h1>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="contain">
+        <div id="select_aa_name">
+          <p>Select Academy Name</p>
+          <br />
         </div>
 
-        <div class="wrap">
-            <div class="contain">
-                <div id="select_aa_name">
-                    <p>Select Academy Name</p>
-                    <br>
-                </div>
-                
-                <select name="aa_dropdown" id="aa_dropdown">
+        <select name="aa_dropdown" id="aa_dropdown"></select>
+        <br /><br />
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter Password"
+          name="fname"
+        />
+        <br /><br />
+        <button
+          id="password_check"
+          type="submit"
+          onclick="on_click_pass_check()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
 
-                  </select>
-                  <br><br>
-                  <input type="password" id="password" placeholder="Enter Password" name="fname">
-                  <br><br>
-                  <button id="password_check" type="submit" onclick="on_click_pass_check()">Submit</button>
-
-              </div>
-          </div>
-          <script src="index_script.js"></script>
-           <!--Calling google APIs-->
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-
-</body>
+    <!--Calling firebase APIs-->
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth-compat.js"></script>
+    <script src="index_script.js"></script>
+    <!--Calling google APIs-->
+    <script
+      async
+      defer
+      src="https://apis.google.com/js/api.js"
+      onload="gapiLoaded()"
+    ></script>
+    <script
+      async
+      defer
+      src="https://accounts.google.com/gsi/client"
+      onload="gisLoaded()"
+    ></script>
+  </body>
 </html>

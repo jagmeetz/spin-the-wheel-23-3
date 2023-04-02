@@ -4,9 +4,7 @@ const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spin-btn");
 const finalValue = document.getElementById("final-value");
 //Object that stores values of minimum and maximum angle for a value
-const rotationValues = [
-  { minDegree: 0, maxDegree: 360, value: 1 },
-];
+const rotationValues = [{ minDegree: 0, maxDegree: 360, value: 1 }];
 
 const rotationValues6 = [
   { minDegree: 0, maxDegree: 30, value: 2 },
@@ -29,7 +27,6 @@ const rotationValues3 = [
   { minDegree: 91, maxDegree: 210, value: 3 },
   { minDegree: 211, maxDegree: 330, value: 2 },
   { minDegree: 331, maxDegree: 360, value: 1 },
-
 ];
 const rotationValues2 = [
   { minDegree: 0, maxDegree: 90, value: 1 },
@@ -37,7 +34,7 @@ const rotationValues2 = [
   { minDegree: 271, maxDegree: 360, value: 1 },
 ];
 //Size of each piece
-const data = [1, 1,1,1,1,1];
+const data = [1, 1, 1, 1, 1, 1];
 //background color for each piece
 var pieColors = [
   "#8b35bc",
@@ -47,8 +44,6 @@ var pieColors = [
   "#8b35bc",
   "#b163da",
 ];
-//Create chart
-
 
 ////spin wheel//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,8 +61,6 @@ for (let i = 0; i < god_data.length; i++) {
     table_data.push(god_data[i]);
   }
 }
-//    console.log(table_data);
-
 ////fetching academy name and retreiving teacher names,classes and other related data //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////render table using table_data //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,11 +90,11 @@ render_table();
 
 ////render chart //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let myChart;
-let label_var=[];
-for (let i=0;i<table_data.length;i++){
+let label_var = [];
+for (let i = 0; i < table_data.length; i++) {
   label_var.push(table_data[i][1]);
 }
-function render_chart(){
+function render_chart() {
   myChart = new Chart(wheel, {
     //Plugin for displaying text on pie chart
     plugins: [ChartDataLabels],
@@ -131,7 +124,8 @@ function render_chart(){
         //display labels inside pie chart
         datalabels: {
           color: "#ffffff",
-          formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+          formatter: (_, context) =>
+            context.chart.data.labels[context.dataIndex],
           font: { size: 24 },
         },
       },
@@ -142,18 +136,14 @@ render_chart();
 ////render chart //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let rotation_value_selector;
-if (table_data.length==2)
-{
-  rotation_value_selector= rotationValues2
-}
-else if (table_data.length==3){
-  rotation_value_selector=rotationValues3
-}
-else if (table_data.length==4){
-  rotation_value_selector=rotationValues4
-}
-else{
-  rotation_value_selector=rotationValues
+if (table_data.length == 2) {
+  rotation_value_selector = rotationValues2;
+} else if (table_data.length == 3) {
+  rotation_value_selector = rotationValues3;
+} else if (table_data.length == 4) {
+  rotation_value_selector = rotationValues4;
+} else {
+  rotation_value_selector = rotationValues;
 }
 //display value based on the randomAngle
 
@@ -195,129 +185,54 @@ const valueGenerator = (angleValue) => {
   for (let i of rotation_value_selector) {
     //if the angleValue is between min and max then display it
     if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      finalValue.innerHTML = `<p>Winner: ${table_data[i.value-1][1]}</p>`;
-      console.log(table_data[i.value-1]);
+      finalValue.innerHTML = `<p>Winner: ${table_data[i.value - 1][1]}</p>`;
+      console.log(table_data[i.value - 1]);
+      var time = unix_to_time(new Date().getTime());
+      var date = unix_to_date(new Date().getTime());
+      update_data(table_data[i.value - 1],time,date);
       //appendValues("1zNxmasKf1U220lQqGGEd2BKkwo3pY55OH66pWkmF98I","Sheet1!A1","RAW","dadasaf");
-       spinBtn.disabled = false;
+      spinBtn.disabled = false;
       break;
     }
   }
 };
-///post on google sheets////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// const CLIENT_ID = "111620250990197785541";
-// const API_KEY = "AIzaSyChPMfCOVsnJgmikJZg7E3A6FX77xxeo-E";
-
-
-// // Discovery doc URL for APIs used by the quickstart
-// const DISCOVERY_DOC =
-//   "https://sheets.googleapis.com/$discovery/rest?version=v4";
-
-// // Authorization scopes required by the API; multiple scopes can be
-// // included, separated by spaces.
-// const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
-
-// let tokenClient;
-// let gapiInited = false;
-// let gisInited = false;
-
-// /**
-//  * Callback after api.js is loaded.
-//  */
-// function gapiLoaded() {
-//   gapi.load("client", initializeGapiClient);
-// }
-// /**
-//  * Callback after the API client is loaded. Loads the
-//  * discovery doc to initialize the API.
-//  */
-// function initializeGapiClient() {
-//   gapi.client.init({
-//     apiKey: API_KEY,
-//     //  clientId: CLIENT_ID,
-//     // scope:  SCOPES,
-//     discoveryDocs: [DISCOVERY_DOC],
-//   });
-//   gapiInited = true;
-//   maybeEnableButtons();
-// }
-
-// /**
-//  * Callback after Google Identity Services are loaded.
-//  */
-// function gisLoaded() {
-//   tokenClient = google.accounts.oauth2.initTokenClient({
-//     client_id: CLIENT_ID,
-//     scope: SCOPES,
-//     callback: "", // defined later
-//   });
-//   gisInited = true;
-//   maybeEnableButtons();
-// }
-
-// /**
-//  * Enables user interaction after all libraries are loaded.
-//  */
-// function maybeEnableButtons() {
-//   if (gapiInited && gisInited) {
-//     // document.getElementById('authorize_button').style.visibility = 'visible';
-//     console.log("gapi initiated");    
-//   }
-// }
-// /**
-//  *  Sign in the user upon button click.
-//  */
-// function handleAuthClick() {
-//   tokenClient.callback = async (resp) => {
-//     if (resp.error !== undefined) {
-//       throw resp;
-//     }
-//   };
-
-//   if (gapi.client.getToken() === null) {
-//     // Prompt the user to select a Google Account and ask for consent to share their data
-//     // when establishing a new session.
-//     tokenClient.requestAccessToken({ prompt: "consent" });
-//   } else {
-//     // Skip display of account chooser and consent dialog for an existing session.
-//     tokenClient.requestAccessToken({ prompt: "" });
-//   }
-// }
-
-// /**
-//  *  Sign out the user upon button click.
-//  */
-// function handleSignoutClick() {
-//   const token = gapi.client.getToken();
-//   if (token !== null) {
-//     google.accounts.oauth2.revoke(token.access_token);
-//     gapi.client.setToken("");
-//   }
-// }
+const firebaseApp = firebase.initializeApp({
+  apiKey: "AIzaSyCofNKXGLmDBwxCSzyfjPQQf0sUtcaMy_0",
+  authDomain: "spin-wheelz.firebaseapp.com",
+  projectId: "spin-wheelz",
+  storageBucket: "spin-wheelz.appspot.com",
+  messagingSenderId: "118466041762",
+  appId: "1:118466041762:web:9717138830c4112e6f44fb",
+});
+const db = firebaseApp.firestore();
 
 
-// async function appendValues(spreadsheetId, range, valueInputOption, _values, callback) {
+  const update_data= (data,time,date)=>{
+    db.collection(data[0])
+    .add({
+      time: time,
+      date: date,
+      aa_name:data[0],
+      t_name:data[1],
+      t_code:data[2],
+    })
+    .then((docRef) => {
+      console.log("Written");
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  }
 
-//   values = _values;
-//   const body = {
-//     values: values,
-//   };
-//   try {
-//     await gapi.client.sheets.spreadsheets.values.append({
-//       spreadsheetId: spreadsheetId,
-//       range: range,
-//       valueInputOption: valueInputOption,
-//       resource: body,
-//     }).then((response) => {
-//       const result = response.result;
-//       console.log(`${result.updates.updatedCells} cells appended.`);
-//       if (callback) callback(response);
-//     });
-//   } catch (err) {
-//     //document.getElementById('content').innerText = err.message;
-//     console.log(err);
-//     return;
-//   }
-// }
+function unix_to_time(timestamp){
 
+  var date = new Date(timestamp);
+  return (date.toLocaleTimeString("default"));
+}
 
+function unix_to_date(timestamp){
+
+  var date = new Date(timestamp);
+  return (date.toLocaleDateString("default"));
+}
