@@ -7,29 +7,28 @@ const firebaseApp = firebase.initializeApp({
   appId: "1:118466041762:web:9717138830c4112e6f44fb",
 });
 const db = firebaseApp.firestore();
-let keys=[];
-const read_keys=()=>{
-  db.collection('keys')
-  .get()
-  .then((data)=>{
-keys= data.docs.map((item)=>{
-  return{...item.data()}
-});
-
-  })
-  .catch((error)=>{
-    console.log(error);
-  })
-}
+let keys = [];
+const read_keys = () => {
+  db.collection("keys")
+    .get()
+    .then((data) => {
+      keys = data.docs.map((item) => {
+        return { ...item.data() };
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 read_keys();
 
 ///connect with google sheet ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO(developer): Set to client ID and API key from the Developer Console
-const CLIENT_ID = '111620250990197785541';
+const CLIENT_ID = "111620250990197785541";
 const API_KEY = "AIzaSyChPMfCOVsnJgmikJZg7E3A6FX77xxeo-E";
-const sheet_id= "1kN24uKeTLC0trCFIeHyugZZNxeKbRs0gBZ6_UrzpDM4";
- 
+const sheet_id = "1kN24uKeTLC0trCFIeHyugZZNxeKbRs0gBZ6_UrzpDM4";
+
 // Discovery doc URL for APIs used by the quickstart
 const DISCOVERY_DOC =
   "https://sheets.googleapis.com/$discovery/rest?version=v4";
@@ -81,9 +80,6 @@ function maybeEnableButtons() {
   if (gapiInited && gisInited) {
     // document.getElementById('authorize_button').style.visibility = 'visible';
     console.log("gapi initiated");
-    // let godi;
-    // godi=JSON.parse (localStorage.getItem('data'));
-    // console.log(godi);
   }
 }
 /**
@@ -131,7 +127,7 @@ async function listMajors(spreadsheet_Id, range_to_get) {
     });
     //console.log(response.result.values);
     god_data = response.result.values;
-    window.localStorage.setItem('data' , JSON.stringify(god_data) );
+    window.localStorage.setItem("data", JSON.stringify(god_data));
     // console.log(god_data);
   } catch (err) {
     //document.getElementById('content').innerText = err.message;
@@ -153,14 +149,6 @@ async function listMajors(spreadsheet_Id, range_to_get) {
   arr_academy_names = [...new Set(academy_names)];
 
   render_dropdown();
-  
-  // Flatten to string to display
-
-  // // const output = range.values.reduce(
-  // //     (str, row) => `${str}${row[0]}, ${row[1]}\n`,
-  // //     'Name, Major:\n');
-  // //document.getElementById("final-value").innerText = output;
-
 }
 
 function render_dropdown() {
@@ -178,29 +166,20 @@ function render_dropdown() {
 function on_click_pass_check() {
   let input_pass = document.getElementById("password").value;
   let selected_academy = document.getElementById("aa_dropdown").value;
-  if (input_pass == keys[0].pass & selected_academy.length >2) {
+  if ((input_pass == keys[0].pass) & (selected_academy.length > 2)) {
     console.log(selected_academy);
     console.log("checked");
-    window.localStorage.setItem('sel_aca' , selected_academy );
-    window.location.href= "http://127.0.0.1:5500/home.html"
-
-    // console.log(selected_academy);
-    // console.log("checked");
+    window.localStorage.setItem("sel_aca", selected_academy);
+    window.location.href = "http://127.0.0.1:5500/demo_spin.html";
 
   }
 }
 function timer() {
   setTimeout(function () {
-    listMajors(
-      sheet_id,
-      "Class Data!A2:C"
-    );
-
+    listMajors(sheet_id, "Class Data!A2:C");
   }, 10000);
 }
 
 timer();
-
-
 
 ///connect with google sheet ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
