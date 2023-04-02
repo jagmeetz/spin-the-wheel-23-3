@@ -31,25 +31,14 @@
     left:20%;
     top: 30%;
     }
-   
-    .table{
-      position: relative;
-      left: 25%;
-      padding-bottom: 0px;
-      padding-right: 0;
-      width: 50%;
-      border: 1px solid;
-    }
+    .demo_wheel{
 
-    #table_id{
-      position: relative;
-     width: 100%;
-      border: 1px solid;
-    }
-    .next_page{
-      position: absolute;
-      left: 20%;
-  }
+        font-size: 1.5em;
+     text-align: center;
+ 
+     color: #202020;
+     font-weight: 500;
+ }
   .wrapper {
     width: 90%;
     max-width: 34.37em;

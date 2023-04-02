@@ -7,7 +7,7 @@
     <title>TC Columbia University</title>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="ran_stu_sel.css" />
   </head>
   <body>
     <!-- top heading bar -->
@@ -21,9 +21,9 @@
     </div>
 
     <div class="wrapper">
-      <div class="table">
-        <table id="table_id"></table>
-      </div>
+        <div class="demo_wheel">
+            <p><strong>Student Selection</strong></p>
+          </div>
 
       <div class="container">
         <canvas id="wheel"></canvas>
@@ -35,29 +35,14 @@
       <div id="final-value">
         <p>Click On The Spin Button To Start</p>
       </div>
-      <br>
-      <div class="next_page">
-        <label>Input Number of Students</label>
-        <select name="numbers" id="numbers"></select>
-        <button
-          type="submit"
-          onclick="next_page()"
-        >
-          Student Selection Spinner
-        </button>
-      </div>
     </div>
     <!-- Chart JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <!-- Chart JS Plugin for displaying text over chart -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 
-    <!--Calling firebase APIs-->
-    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth-compat.js"></script>
 
     <!-- Script -->
-    <script src="home_script.js"></script>
+    <script src="ran_stu_sel.js"></script>
   </body>
 </html>
