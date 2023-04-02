@@ -5,16 +5,20 @@ const finalValue = document.getElementById("final-value");
 //Object that stores values of minimum and maximum angle for a value
 
 const rotationValues = [
-  { minDegree: 0, maxDegree: 30, value: 2 },
-  { minDegree: 31, maxDegree: 90, value: 1 },
-  { minDegree: 91, maxDegree: 150, value: 6 },
-  { minDegree: 151, maxDegree: 210, value: 5 },
-  { minDegree: 211, maxDegree: 270, value: 4 },
-  { minDegree: 271, maxDegree: 330, value: 3 },
-  { minDegree: 331, maxDegree: 360, value: 2 },
+  { minDegree: 0, maxDegree: 18, value: 3 },
+  { minDegree: 19, maxDegree: 54, value: 2 },
+  { minDegree: 55, maxDegree: 90, value: 1 },
+  { minDegree: 91, maxDegree: 126, value: 10 },
+  { minDegree: 127, maxDegree: 162, value: 9 },
+  { minDegree: 163, maxDegree: 198, value: 8 },
+  { minDegree: 199, maxDegree: 234, value: 7 },
+  { minDegree: 235, maxDegree: 270, value: 6 },
+  { minDegree: 271, maxDegree: 306, value: 5 },
+  { minDegree: 307, maxDegree: 342, value: 4 },
+  { minDegree: 343, maxDegree: 360, value: 3 },
 ];
 //Size of each piece
-const data = [1, 1, 1, 1, 1, 1];
+const data = [1, 1, 1, 1, 1, 1,1,1,1,1];
 //background color for each piece
 var pieColors = [
   "#8b35bc",
@@ -30,7 +34,7 @@ var pieColors = [
 
 ////render chart //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let myChart;
-let label_var = ["Apple","Mango","Banana","Litchi", "Papaya","Pineapple"];
+let label_var = ["1","2","3","4","5", "6","7","8","9","10"];
 
 function render_chart() {
   myChart = new Chart(wheel, {
@@ -111,7 +115,7 @@ const valueGenerator = (angleValue) => {
   for (let i of rotationValues) {
     //if the angleValue is between min and max then display it
     if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      finalValue.innerHTML = `<p>Fruit: ${label_var[i.value-1]}</p>`;
+      finalValue.innerHTML = `<p>Selected Row: ${label_var[i.value-1]}</p>`;
       spinBtn.disabled = false;
       break;
     }
@@ -119,5 +123,5 @@ const valueGenerator = (angleValue) => {
 };
 
 function next_page(){
-    window.location.href = "http://127.0.0.1:5500/row_sel.html";
+    window.location.href = "http://127.0.0.1:5500/home.html";
 }
